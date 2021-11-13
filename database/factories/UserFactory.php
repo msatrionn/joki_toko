@@ -32,7 +32,7 @@ class UserFactory extends Factory
         return [
             'username' => 'admin',
             'level' => 'admin',
-            'password' => bcrypt('1234')
+            'password' => bcrypt('user1234')
         ];
     }
 

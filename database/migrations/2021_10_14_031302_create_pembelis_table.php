@@ -16,7 +16,7 @@ class CreatePembelisTable extends Migration
         Schema::create('pembeli', function (Blueprint $table) {
             $table->integer('id_pembeli', true);
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama_pembeli', 50);
             $table->string('alamat', 50);
             $table->string('no_hp', 16);

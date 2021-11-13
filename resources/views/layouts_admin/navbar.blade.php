@@ -6,22 +6,22 @@
         </button>
     </div>
     <div class="p-4">
-        <h1><a href="index.html" class="logo">Flash</a></h1>
+        <h1><a href="index.html" class="logo">Baraka</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                <a href="{{ url('dashboard') }}"><span class="fa fa-home mr-3"></span> Home</a>
             </li>
             <li>
                 <a href="{{ route('produk.index') }}"><span class="fa fa-user mr-3"></span> Produk</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-briefcase mr-3"></span> Pelanggan</a>
+                <a href="{{ route('pembeli.index') }}"><span class="fa fa-briefcase mr-3"></span> Pembeli</a>
             </li>
             <li>
                 <a href="{{ route('karyawan.index') }}"><span class="fa fa-sticky-note mr-3"></span> Karyawan</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+                <a href="{{ route('pemesanan.index') }}"><span class="fa fa-paper-plane mr-3"></span> Pemesanan</a>
             </li>
         </ul>
 

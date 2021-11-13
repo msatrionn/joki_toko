@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
+use App\Models\Pembeli;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PembeliController extends Controller
@@ -13,7 +16,9 @@ class PembeliController extends Controller
      */
     public function index()
     {
-        //
+
+        $pembeli = Pembeli::all();
+        return view('admin.pelanggan.index', compact('pembeli'));
     }
 
     /**
@@ -26,6 +31,7 @@ class PembeliController extends Controller
         //
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +40,21 @@ class PembeliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $acak = random_int(1, 9999999);
+        User::create([
+            'id' => $acak,
+            'username' => $request->username,
+            'password' => bcrypt($request->pasword),
+            'level' => 'pembeli',
+        ]);
+        Pembeli::create([
+            'user_id' => $acak,
+            'nama_pembeli' => $request->nama_pembeli,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        return redirect('pembeli');
     }
 
     /**
@@ -56,7 +76,9 @@ class PembeliController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::distinct()->get();
+        $pembeli = Pembeli::where('id_pembeli', $id)->first();
+        return view('admin.pelanggan.edit', compact('pembeli', 'user'));
     }
 
     /**
@@ -68,7 +90,9 @@ class PembeliController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pembeli = Pembeli::where('id_pembeli', $id)->first();
+        $pembeli->update($request->all());
+        return redirect('pembeli');
     }
 
     /**

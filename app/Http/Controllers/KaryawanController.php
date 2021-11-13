@@ -110,6 +110,7 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $karyawan = DB::table('karyawan')->where('id_karyawan', $id);
+        $karyawan->delete();
     }
 }

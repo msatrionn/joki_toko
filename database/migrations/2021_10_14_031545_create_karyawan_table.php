@@ -16,7 +16,7 @@ class CreateKaryawanTable extends Migration
         Schema::create('karyawan', function (Blueprint $table) {
             $table->integer('id_karyawan', true);
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama_karyawan', 50);
             $table->string('jabatan', 20);
             $table->string('alamat', 50);

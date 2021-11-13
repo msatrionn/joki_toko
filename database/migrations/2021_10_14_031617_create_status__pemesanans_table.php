@@ -13,10 +13,10 @@ class CreateStatusPemesanansTable extends Migration
      */
     public function up()
     {
-        Schema::create('status__pemesanan', function (Blueprint $table) {
+        Schema::create('status_pemesanan', function (Blueprint $table) {
             $table->integer('id_status', true);
             $table->integer('pemesanan_id');
-            $table->foreign('pemesanan_id')->references('id_pemesanan')->on('pemesanan');
+            $table->foreign('pemesanan_id')->references('id_pemesanan')->on('pemesanan')->onDelete('cascade');
             $table->string('status');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateStatusPemesanansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status__pemesanan');
+        Schema::dropIfExists('status_pemesanan');
     }
 }

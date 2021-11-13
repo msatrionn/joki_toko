@@ -1,6 +1,6 @@
 @extends('layouts_admin.home')
-@section('title','Produk')
-@section('title_header','Produk')
+@section('title','Karyawan')
+@section('title_header','Karyawan')
 @section('content')
 
 <form action="{{ route('karyawan.update',$karyawan->id_karyawan) }}" method="post">
