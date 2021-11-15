@@ -6,7 +6,7 @@
 
 <br>
 <div class="table-responsive">
-    <button class="btn btn-primary btn-sm col-md-1" type="button" data-toggle="modal" data-target="#my-modalAdd">Tambah
+    <button class="btn btn-primary btn-sm col-md-3" type="button" data-toggle="modal" data-target="#my-modalAdd">Tambah
         Produk</button>
     <div class="form-group" style="margin-right: 0 auto; float: right;width: 300px">
         <label for="">Search</label>
@@ -61,12 +61,12 @@
                         <div class="form-group">
                             <label for="">Nama Produk</label>
                             <input type="text" class="form-control input-class" name="nama_produk" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="">Jenis Produk</label>
                             <input type="text" class="form-control input-class" name="jenis_produk" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>

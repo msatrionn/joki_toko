@@ -31,22 +31,25 @@ class DashboardController extends Controller
     }
     public function home()
     {
-        if (auth()->user()->level == 'admin' or auth()->user()->level == 'karyawan') {
-            $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
-                ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
-                ->join('karyawan', 'karyawan.id_karyawan', 'pemesanan.karyawan_id')
-                ->join('status_pemesanan', 'status_pemesanan.pemesanan_id', 'pemesanan.id_pemesanan')
-                ->orderBy('id_pemesanan')
-                ->take(5)
-                ->get();
-        } else {
-            $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
-                ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
-                ->join('karyawan', 'karyawan.id_karyawan', 'pemesanan.karyawan_id')
-                ->join('status_pemesanan', 'status_pemesanan.pemesanan_id', 'pemesanan.id_pemesanan')
-                ->where('pembeli.user_id', auth()->user()->id)
-                ->get();
+        if (auth()->user()) {
+            if (auth()->user()->level == 'admin' or auth()->user()->level == 'karyawan') {
+                $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
+                    ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
+                    ->join('karyawan', 'karyawan.id_karyawan', 'pemesanan.karyawan_id')
+                    ->join('status_pemesanan', 'status_pemesanan.pemesanan_id', 'pemesanan.id_pemesanan')
+                    ->orderBy('id_pemesanan')
+                    ->take(5)
+                    ->get();
+            } else {
+                $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
+                    ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
+                    ->join('karyawan', 'karyawan.id_karyawan', 'pemesanan.karyawan_id')
+                    ->join('status_pemesanan', 'status_pemesanan.pemesanan_id', 'pemesanan.id_pemesanan')
+                    ->where('pembeli.user_id', auth()->user()->id)
+                    ->get();
+            }
+            return view('client', compact('pemesanan'));
         }
-        return view('client', compact('pemesanan'));
+        return view('client');
     }
 }

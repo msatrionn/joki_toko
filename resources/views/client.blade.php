@@ -45,6 +45,14 @@
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('asset_img/baraka.jpeg') }}" alt="" height="50">
             </a>
+            <div class="col-md-4" style="padding-left: 300px;">
+                @if (auth()->user() && auth()->user()->level=='admin')
+                <a href="{{ route('dashboard') }}" style="text-decoration: none;color: #000;">Dashboard</a>
+                @endif
+                @if (auth()->user())
+                <a href="{{ route('logout') }}" style="text-decoration: none; color: #000">Logout</a>
+                @endif
+            </div>
         </div>
     </nav>
     <section class="head">
@@ -113,7 +121,13 @@
                     @endforeach
                 </div>
                 @else
-                <h2>Belum ada pesanan</h2>
+                <div class="col-md-3" style="margin: 0 auto;text-align: center">
+                    <h5>Belum ada pesanan</h5>
+                    <a href="{{ route('login') }}" class="btn btn-primary" style="margin:0 auto;width: 100%;">Login
+                        untuk
+                        melihat
+                        pesanan</a>
+                </div>
                 @endif
             </div>
         </div>

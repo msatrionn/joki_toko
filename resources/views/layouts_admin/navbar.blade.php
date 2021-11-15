@@ -9,31 +9,28 @@
         <h1><a href="index.html" class="logo">Baraka</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="{{ url('dashboard') }}"><span class="fa fa-home mr-3"></span> Home</a>
+                <a href="{{ url('admin/dashboard') }}"><span class="fa fa-home mr-3"></span> Home</a>
             </li>
             <li>
-                <a href="{{ route('produk.index') }}"><span class="fa fa-user mr-3"></span> Produk</a>
+                <a href="{{ route('produk.index') }}"><span class="fa fa-briefcase mr-3"></span> Produk</a>
             </li>
             <li>
-                <a href="{{ route('pembeli.index') }}"><span class="fa fa-briefcase mr-3"></span> Pembeli</a>
+                <a href="{{ route('pembeli.index') }}"><span class="fa fa-user  mr-3"></span> Pembeli</a>
             </li>
+            @if (auth()->user()->level=='admin')
             <li>
                 <a href="{{ route('karyawan.index') }}"><span class="fa fa-sticky-note mr-3"></span> Karyawan</a>
             </li>
+            @endif
             <li>
                 <a href="{{ route('pemesanan.index') }}"><span class="fa fa-paper-plane mr-3"></span> Pemesanan</a>
             </li>
+            <li>
+                <a href="{{ route('logout') }}"><span class="fa fa-sign-out mr-3"></span> logout</a>
+            </li>
         </ul>
 
-        <div class="mb-5">
-            <h3 class="h6 mb-3">Subscribe for newsletter</h3>
-            <form action="#" class="subscribe-form">
-                <div class="form-group d-flex">
-                    <div class="icon"><span class="icon-paper-plane"></span></div>
-                    <input type="text" class="form-control" placeholder="Enter Email Address">
-                </div>
-            </form>
-        </div>
+
 
         <div class="footer">
             <p>

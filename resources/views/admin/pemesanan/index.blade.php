@@ -59,7 +59,7 @@
                                 <option value="Siap dikirim">Siap dikirim</option>
                             </select>
                             <div style="width: 3%;margin-left: 5px">
-                                <a href="{{ route('pemesanan.show',$item->id_pemesanan) }}"><i
+                                <a href="{{ route('pemesanan',$item->id_pemesanan) }}"><i
                                         class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -133,32 +133,32 @@
                     <div class="form-group">
                         <label for="">Jumlah</label>
                         <input type="numbar" class="form-control input-class" name="jumlah" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('jumlah') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">lama Produksi</label>
                         <input type="text" class="form-control input-class" name="lama_produksi" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('lama_produksi') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Tanggal pesan</label>
                         <input type="date" class="form-control input-class" name="tanggal_pemesanan" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('tanggal_pemesanan') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Target jadi</label>
                         <input type="date" class="form-control input-class" name="target_selesai" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('target_selesai') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Biaya</label>
                         <input type="number" class="form-control input-class" name="biaya" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('biaya') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Ukuran</label>
                         <input type="text" class="form-control input-class" name="ukuran" id=""
-                            aria-describedby="helpId" placeholder="" required>
+                            aria-describedby="helpId" placeholder="" value="{{ old('ukuran') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Gambar</label>
@@ -167,6 +167,7 @@
                     </div>
 
                     @error('gambar')
+                    <span class="alert-danger"> {{ $message }}</span>
                     <script>
                         alert('Gagal menambah data, tipe file harus png atau jpg')
                     </script>

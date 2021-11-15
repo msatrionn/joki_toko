@@ -41,10 +41,12 @@ class PembeliController extends Controller
     public function store(Request $request)
     {
         $acak = random_int(1, 9999999);
+
+        $request->validate(['username' => 'required|unique:users']);
         User::create([
             'id' => $acak,
             'username' => $request->username,
-            'password' => bcrypt($request->pasword),
+            'password' => bcrypt($request->password),
             'level' => 'pembeli',
         ]);
         Pembeli::create([
@@ -54,7 +56,7 @@ class PembeliController extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        return redirect('pembeli');
+        return redirect('admin/pembeli');
     }
 
     /**
@@ -92,7 +94,7 @@ class PembeliController extends Controller
     {
         $pembeli = Pembeli::where('id_pembeli', $id)->first();
         $pembeli->update($request->all());
-        return redirect('pembeli');
+        return redirect('admin/pembeli');
     }
 
     /**

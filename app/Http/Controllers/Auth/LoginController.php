@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    public function show_login()
+    {
+        if (empty(auth()->user())) {
+            return view('auth.login');
+        } elseif (auth()->user()->level == 'admin' or auth()->user()->level == 'karyawan') {
+            return redirect('admin/dashboard');
+        } else {
+            return redirect('/');
+        }
+    }
     public function login(Request $request)
     {
         $username = $request->username;
@@ -22,7 +32,7 @@ class LoginController extends Controller
 
                 'username.required' => 'username diisi'
             ]);
-            return redirect('/')
+            return redirect('/login')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -33,13 +43,18 @@ class LoginController extends Controller
 
                 'username.required' => 'username diisi'
             ]);
-            return redirect('/')
+            return redirect('/login')
                 ->withErrors($validator)
                 ->withInput();
         }
         if (Auth::attempt($request->only('username', 'password'))) {
-            return redirect('dashboard');
+            return redirect('admin/dashboard');
         }
-        return redirect('/');
+        return redirect('/login');
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

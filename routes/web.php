@@ -19,23 +19,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
-
+Route::get('login', [LoginController::class, 'show_login'])->name('login');
+Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::post('post_login', [LoginController::class, 'login'])->name('post_login');
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashoard');
-    Route::get(
-        '/home',
-        [DashboardController::class, 'home']
-    )->name('home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('produk', ProdukController::class);
     Route::resource('pembeli', PembeliController::class);
     Route::resource('karyawan', KaryawanController::class);
     Route::resource('pemesanan', PemesananController::class)->except('show');
     Route::put('update_pemesanan/{id}', [PemesananController::class, 'update_pemesanan'])->name('update_pemesanan');
 });
+Route::middleware(['auth', 'role:admin,karyawan'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('produk', ProdukController::class);
+    Route::resource('pembeli', PembeliController::class);
+    Route::resource('pemesanan', PemesananController::class)->except('show');
+    Route::put('update_pemesanan/{id}', [PemesananController::class, 'update_pemesanan'])->name('update_pemesanan');
+});
+
+Route::get('/logout_session', [LoginController::class, 'logout'])->name('logout');
 Route::get('/pemesanan/{id}', [PemesananController::class, 'show'])->name('pemesanan');
 // Auth::routes();
 

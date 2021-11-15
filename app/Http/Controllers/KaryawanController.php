@@ -41,10 +41,13 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $acak = random_int(1, 9999999);
+        $request->validate([
+            'username' => 'unique:users'
+        ]);
         User::create([
             'id' => $acak,
             'username' => $request->username,
-            'password' => bcrypt($request->pasword),
+            'password' => bcrypt($request->password),
             'level' => 'karyawan',
         ]);
         Karyawan::create([
@@ -55,7 +58,7 @@ class KaryawanController extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        return redirect('karyawan');
+        return redirect('admin/karyawan');
     }
 
     /**
@@ -99,7 +102,8 @@ class KaryawanController extends Controller
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
         ]);
-        return redirect('karyawan');
+
+        return redirect('admin/karyawan');
     }
 
     /**

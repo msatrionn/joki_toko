@@ -6,7 +6,7 @@
 
 <br>
 <div class="table-responsive">
-    <button class="btn btn-primary btn-sm col-md-1" type="button" data-toggle="modal" data-target="#my-modalAdd">Tambah
+    <button class="btn btn-primary btn-sm col-md-3" type="button" data-toggle="modal" data-target="#my-modalAdd">Tambah
         Pembeli</button>
     <div class="form-group" style="margin-right: 0 auto; float: right;width: 300px">
         <label for="">Search</label>
@@ -63,28 +63,35 @@
                         <div class="form-group">
                             <label for="">Nama pembeli</label>
                             <input type="text" class="form-control input-class" name="nama_pembeli" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" value="{{ old('nama_pembeli') }}" required>
                         </div>
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input type="text" class="form-control input-class" name="username" id=""
-                                aria-describedby="helpId" placeholder="">
+                            <input type="text" class="form-control input-class @error('username') is-invalid @enderror"
+                                name="username" id="" aria-describedby="helpId" value="{{ old('username') }}"
+                                placeholder="" required>
                         </div>
+                        @error('username')
+                        <span class="alert-danger"> {{ $message }}</span>
+                        <script>
+                            alert('user sudah ada')
+                        </script>
+                        @enderror
                         <div class="form-group">
                             <label for="">Password</label>
                             <input type="password" class="form-control input-class" name="password" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" value="{{ old('password') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">Alamat</label>
                             <input type="text" class="form-control input-class" name="alamat" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" value="{{ old('alamat') }}" required>
                         </div>
                         <div class="form-group">
                             <label for="">No HP</label>
                             <input type="text" class="form-control input-class" name="no_hp" id=""
-                                aria-describedby="helpId" placeholder="">
+                                aria-describedby="helpId" placeholder="" value="{{ old('no_hp') }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>

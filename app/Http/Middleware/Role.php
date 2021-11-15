@@ -19,6 +19,13 @@ class Role
         if (in_array(auth()->user()->level, $levels)) {
             return $next($request);
         }
+        if (auth()->user()->level == 'admin') {
+            return redirect('admin/dashboard');
+        } elseif (auth()->user()->level == 'karyawan') {
+            return redirect('admin/dashboard');
+        } elseif (auth()->user()->level == 'pembeli') {
+            return redirect('/');
+        }
         abort(404);
     }
 }

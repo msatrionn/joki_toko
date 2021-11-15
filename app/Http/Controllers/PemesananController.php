@@ -54,6 +54,7 @@ class PemesananController extends Controller
         $request->validate([
             'gambar' => 'mimes:png,jpg'
         ]);
+
         Pemesanan::create([
             'id_pemesanan' => $request->id_pemesanan,
             'produk_id' => $request->produk_id,
@@ -73,7 +74,7 @@ class PemesananController extends Controller
         ]);
         $file->move('img', $name);
 
-        return redirect('pemesanan');
+        return redirect('admin/pemesanan');
     }
 
     /**
@@ -161,7 +162,7 @@ class PemesananController extends Controller
                 'gambar' => $name,
             ]);
         }
-        return redirect('pemesanan');
+        return redirect('admin/pemesanan');
     }
     public function update_pemesanan(Request $request, $id)
     {
