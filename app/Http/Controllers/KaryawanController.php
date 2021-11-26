@@ -81,7 +81,7 @@ class KaryawanController extends Controller
     public function edit($id)
     {
         $user = User::all();
-        $karyawan = Karyawan::where('id_karyawan', $id)->first();
+        $karyawan = Karyawan::join('users', 'users.id', 'karyawan.user_id')->where('id_karyawan', $id)->first();
         return view('admin.karyawan.edit', compact('karyawan', 'user'));
     }
 
@@ -94,13 +94,20 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $karyawan = DB::table('karyawan')->where('id_karyawan', $id);
+        $karyawan_user = User::join('karyawan', 'karyawan.user_id', 'users.id')
+            ->where('id_karyawan', $id)->first();
+
         $karyawan->update([
-            'user_id' => $request->user_id,
             'nama_karyawan' => $request->nama_karyawan,
             'jabatan' => $request->jabatan,
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
+        ]);
+
+        $karyawan_user->update([
+            'username' => $request->username
         ]);
 
         return redirect('admin/karyawan');

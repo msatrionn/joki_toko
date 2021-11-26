@@ -48,7 +48,7 @@
                         @csrf @method('put')
                         <div class="row" style="display: flex; width: 100%;align-items: center">
                             <select name="status" id="" class="form-control"
-                                style="border:1px solid rgba(0,0,0,0.1);width:90%;" onchange="submitDialog()">
+                                style="border:1px solid rgba(0,0,0,0.1);width:90%;" onchange="submitDialog(this.form)">
                                 <option value="{{ $item->status}}" class="btn-primary">{{ $item->status}}</option>
                                 <option value="Memesan">Memesan</option>
                                 <option value="Proses pemotongan bahan">Pemotongan Bahan</option>
@@ -185,13 +185,11 @@
 
 </div>
 <script>
-    function submitDialog(){
-        pop= confirm("Ganti status?");
-        if (pop) {
-            this.form.submit()
-        }
-        else{
-            location.reload()
+    function submitDialog(form){
+    if(confirm('Are you sure you want to submit this form?')){
+    form.submit();
+    } else {
+    location.reload();
         }
     }
 </script>

@@ -17,7 +17,7 @@ class PembeliController extends Controller
     public function index()
     {
 
-        $pembeli = Pembeli::all();
+        $pembeli = Pembeli::join('users', 'users.id', 'pembeli.user_id')->get();
         return view('admin.pelanggan.index', compact('pembeli'));
     }
 
@@ -79,7 +79,7 @@ class PembeliController extends Controller
     public function edit($id)
     {
         $user = User::distinct()->get();
-        $pembeli = Pembeli::where('id_pembeli', $id)->first();
+        $pembeli = Pembeli::join('users', 'users.id', 'pembeli.user_id')->where('id_pembeli', $id)->first();
         return view('admin.pelanggan.edit', compact('pembeli', 'user'));
     }
 
@@ -93,7 +93,17 @@ class PembeliController extends Controller
     public function update(Request $request, $id)
     {
         $pembeli = Pembeli::where('id_pembeli', $id)->first();
-        $pembeli->update($request->all());
+        $pembeli_user = User::join('pembeli', 'pembeli.user_id', 'users.id')
+            ->where('id_pembeli', $id)->first();
+        $pembeli->update([
+            'nama_pembeli' => $request->nama_pembeli,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+        ]);
+        $pembeli_user->update([
+            'username' => $request->username
+        ]);
+
         return redirect('admin/pembeli');
     }
 

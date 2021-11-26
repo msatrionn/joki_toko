@@ -16,6 +16,7 @@
         <thead>
             <tr class="btn-primary">
                 <td>No</td>
+                <td>Username</td>
                 <td>Nama Pembeli</td>
                 <td>Alamat </td>
                 <td>No hp</td>
@@ -26,6 +27,7 @@
             @foreach ($pembeli as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->username }}</td>
                 <td>{{ $item->nama_pembeli }}</td>
                 <td>{{ $item->alamat}}</td>
                 <td>{{ $item->no_hp }}</td>

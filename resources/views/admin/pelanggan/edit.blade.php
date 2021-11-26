@@ -7,12 +7,8 @@
     @csrf @method('put')
     <div class="form-group">
         <input type="hidden" name="id_pembeli" id="" value="{{ $pembeli->id_pembeli }}">
-        <label for="user_id">User</label>
-        <select name="user_id" id="user_id" class="form-control">
-            @foreach ($user as $item)
-            <option value="{{ $item->id }}" required>{{ $item->username }}</option>
-            @endforeach
-        </select>
+        <label for="nama_pembeli">Username pembeli</label>
+        <input id="username" class="form-control" type="text" name="username" value="{{ $pembeli->username }}" required>
     </div>
     <div class="form-group">
         <label for="nama_pembeli">Nama pembeli</label>

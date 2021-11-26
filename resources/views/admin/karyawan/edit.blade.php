@@ -6,12 +6,12 @@
 <form action="{{ route('karyawan.update',$karyawan->id_karyawan) }}" method="post">
     @csrf @method('put')
     <div class="form-group">
-        <label for="user_id">User</label>
-        <select name="user_id" id="user_id" class="form-select">
-            @foreach ($user as $item)
-            <option value="{{ $item->id }}" required>{{ $item->username }}</option>
-            @endforeach
-        </select>
+        <div class="form-group">
+            <input type="hidden" name="id_karyawan" id="" value="{{ $karyawan->id_karyawan }}">
+            <label for="nama_karyawan">Username karyawan</label>
+            <input id="username" class="form-control" type="text" name="username" value="{{ $karyawan->username }}"
+                required>
+        </div>
     </div>
     <div class="form-group">
         <label for="nama_karyawan">Nama karyawan</label>
