@@ -21,7 +21,7 @@ class PemesananController extends Controller
     {
         $generate = random_int(1, 9999);
         $produk = Produk::all();
-        $karyawan = Karyawan::all();
+        $karyawan = Karyawan::where('user_id', auth()->user()->id)->get();
         $pembeli = Pembeli::all();
         $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
             ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
@@ -29,6 +29,28 @@ class PemesananController extends Controller
             ->join('status_pemesanan', 'status_pemesanan.pemesanan_id', 'pemesanan.id_pemesanan')
             ->get();
         return view('admin.pemesanan.index', compact('generate', 'pemesanan', 'produk', 'karyawan', 'pembeli'));
+    }
+    public function laporan(Request $request)
+    {
+        $awal = $request->awal ?? "";
+        $akhir = $request->akhir ?? "";
+        if ($awal or $akhir) {
+            $pemesanan = Pemesanan::groupBy('tanggal_pemesanan')
+                ->selectRaw('sum(biaya) as biaya')
+                ->selectRaw('tanggal_pemesanan')
+                ->selectRaw('sum(jumlah) as jumlah')
+                ->whereBetween('tanggal_pemesanan', [$awal, $akhir])
+                ->orderBy("tanggal_pemesanan", 'desc')
+                ->get();
+        } else {
+            $pemesanan = Pemesanan::groupBy('tanggal_pemesanan')
+                ->selectRaw('sum(biaya) as biaya')
+                ->selectRaw('tanggal_pemesanan')
+                ->selectRaw('sum(jumlah) as jumlah')
+                ->orderBy("tanggal_pemesanan", 'desc')
+                ->get();
+        }
+        return view('admin.pemesanan.laporan', compact('pemesanan', 'awal', 'akhir'));
     }
 
     /**
@@ -103,8 +125,9 @@ class PemesananController extends Controller
     public function edit($id)
     {
         $produk = Produk::all();
-        $karyawan = Karyawan::all();
-        $pembeli = Pembeli::all();
+        $karyawan = Karyawan::where('user_id', auth()->user()->id)->get();
+        $pembeli =  Pemesanan::join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
+            ->where('id_pemesanan', $id)->get();
         $pemesanan = Pemesanan::join('produk', 'produk.id_produk', 'pemesanan.produk_id')
             ->join('pembeli', 'pembeli.id_pembeli', 'pemesanan.pembeli_id')
             ->join('karyawan', 'karyawan.id_karyawan', 'pemesanan.karyawan_id')

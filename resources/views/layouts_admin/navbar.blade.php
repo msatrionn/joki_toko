@@ -26,6 +26,10 @@
                 <a href="{{ route('pemesanan.index') }}"><span class="fa fa-paper-plane mr-3"></span> Pemesanan</a>
             </li>
             <li>
+                <a href="{{ route('pemesanan.laporan') }}"><span class="fa fa-sticky-note mr-3"></span> Laporan
+                    Pemesanan</a>
+            </li>
+            <li>
                 <a href="{{ route('logout') }}"><span class="fa fa-sign-out mr-3"></span> logout</a>
             </li>
         </ul>

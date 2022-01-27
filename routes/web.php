@@ -35,6 +35,7 @@ Route::middleware(['auth', 'role:admin,karyawan'])->prefix('admin')->group(funct
     Route::resource('produk', ProdukController::class);
     Route::resource('pembeli', PembeliController::class);
     Route::resource('pemesanan', PemesananController::class)->except('show');
+    Route::get('pemesanan/laporan', [PemesananController::class, 'laporan'])->name('pemesanan.laporan');
     Route::put('update_pemesanan/{id}', [PemesananController::class, 'update_pemesanan'])->name('update_pemesanan');
 });
 

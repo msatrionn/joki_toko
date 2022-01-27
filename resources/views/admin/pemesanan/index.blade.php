@@ -65,7 +65,7 @@
                         </div>
                     </form>
                 </td>
-                <td>{{ $item->biaya }}</td>
+                <td>Rp. {{ number_format($item->biaya,0,2) }}</td>
                 <td>{{ $item->ukuran }}</td>
                 <td>{{ $item->jumlah }}</td>
                 <td><img src="{{ asset('img/'.$item->gambar) }}" alt="" height="150px"></td>
@@ -132,22 +132,22 @@
 
                     <div class="form-group">
                         <label for="">Jumlah</label>
-                        <input type="numbar" class="form-control input-class" name="jumlah" id=""
+                        <input type="number" class="form-control input-class" name="jumlah" id=""
                             aria-describedby="helpId" placeholder="" value="{{ old('jumlah') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">lama Produksi</label>
-                        <input type="text" class="form-control input-class" name="lama_produksi" id=""
+                        <input type="text" class="form-control input-class" name="lama_produksi" id="produksi"
                             aria-describedby="helpId" placeholder="" value="{{ old('lama_produksi') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Tanggal pesan</label>
-                        <input type="date" class="form-control input-class" name="tanggal_pemesanan" id=""
+                        <input type="date" class="form-control input-class" name="tanggal_pemesanan" id="pesan"
                             aria-describedby="helpId" placeholder="" value="{{ old('tanggal_pemesanan') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="">Target jadi</label>
-                        <input type="date" class="form-control input-class" name="target_selesai" id=""
+                        <input type="date" class="form-control input-class" name="target_selesai" id="jadi"
                             aria-describedby="helpId" placeholder="" value="{{ old('target_selesai') }}" required>
                     </div>
                     <div class="form-group">
@@ -186,13 +186,24 @@
 </div>
 <script>
     function submitDialog(form){
-    if(confirm('Are you sure you want to submit this form?')){
-    form.submit();
-    } else {
-    location.reload();
-        }
+if(confirm('Ganti status?')){
+form.submit();
+} else {
+location.reload();
     }
+}
 </script>
+{{-- <script>
+    var produk=document.getElementById('produk');
+    var pesan=document.getElementById('pesan');
+    var jadi=document.getElementById('jadi');
+function ganti(){
+    var theDate = new Date(pesan);
+    var myNewDate = new Date(theDate);
+    myNewDate.setDate(myNewDate.getDate() + 30);
+    console.log(myNewDate)
+}
+</script> --}}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
